@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Post, Vote } = require("../../models");
+const { User, Post, Comment, Vote } = require("../../models");
 
 
 // get all users
@@ -81,9 +81,7 @@ router.post("/login", (req, res) => {
       res.status(400).json({ message: "No user with that email address!" });
       return;
     }
-    //pass comment syntax in front of this line in the .then()
-    //res.json({ user: dbUserData });
-
+    
     // Verify user
     const validPassword = dbUserData.checkPassword(req.body.password);
     if (!validPassword) {
