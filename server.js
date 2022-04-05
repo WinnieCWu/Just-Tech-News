@@ -18,7 +18,7 @@ const sess = {
     db: sequelize
   })
 };
-app.use(session(sess));
+
 
 const hbs = exphbs.create({});
 
@@ -34,6 +34,7 @@ app.set('view engine', 'handlebars');
 // turn on routes
 app.use(require('./controllers/'));
 
+app.use(session(sess));
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
