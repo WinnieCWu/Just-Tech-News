@@ -80,10 +80,9 @@ router.get('/edit/:id', withAuth, (res,req) => {
       const post = dbPostData.get({ plain: true });
 
       // pass data to template
-      res.render('single-post', { 
+      res.render('edit-post', { 
         post,
-        //template for users not logged in, so they don't see comment form or upvote button
-        loggedIn: req.session.loggedIn 
+        loggedIn: true
       });
     })
     .catch(err => {

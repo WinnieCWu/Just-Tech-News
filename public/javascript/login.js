@@ -1,3 +1,28 @@
+
+async function loginFormHandler(event) {
+    event.preventDefault();
+
+    const email = document.querySelector('#email-signup').value.trim();
+    const password = document.querySelector('#password-signup').value.trim();
+
+    if (email && password) {
+        const response = await fetch('/api/users/login', {
+            method: 'post',
+            body: JSON.stringify({
+                email,
+                password
+            }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        // check the response status with '.ok' property on response object
+        if (response.ok) {
+            document.location.replace('/dashboard');
+        } else {
+            alert(response.statusText);
+        }
+    }
+}
+
 //create a listener and a function to handle the signup submission
 async function signupFormHandler(event) {
     event.preventDefault();
@@ -19,30 +44,6 @@ async function signupFormHandler(event) {
         // check the response status with '.ok' property on response object
         if (response.ok) {
             console.log('success');
-        } else {
-            alert(response.statusText);
-        }
-    }
-}
-
-async function loginFormHandler(event) {
-    event.preventDefault();
-
-    const email = document.querySelector('#email-signup').value.trim();
-    const password = document.querySelector('#password-signup').value.trim();
-
-    if (email && password) {
-        const response = await fetch('/api/users/login', {
-            method: 'post',
-            body: JSON.stringify({
-                email,
-                password
-            }),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        // check the response status with '.ok' property on response object
-        if (response.ok) {
-            document.location.replace('/dashboard');
         } else {
             alert(response.statusText);
         }
